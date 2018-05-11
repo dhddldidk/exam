@@ -17,7 +17,7 @@ public class ProductServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		service = new ProductService();
+		service = ProductService.getInstance();
 	}
 
 	@AfterClass
@@ -25,7 +25,7 @@ public class ProductServiceTest {
 		service = null;
 	}
 
-	@Test
+	//@Test
 	public void test1InsertItem() {
 		Product product = new Product();
 		product.setCode("A001");
@@ -35,5 +35,14 @@ public class ProductServiceTest {
 		Assert.assertSame(1, result);
 		
 		System.out.println(product);
+	}
+	
+	@Test
+	public void test2selectItemByCode() {
+		Product product = new Product();
+		product.setCode("A001");
+		
+		Product productFind = service.selectItemByCode(product);
+		Assert.assertNotNull(productFind);
 	}
 }

@@ -1,5 +1,8 @@
 package kr.or.dgit.exam.service;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
@@ -16,7 +19,7 @@ public class ProductService {
 		return instance;
 	}
 
-	public ProductService() {
+	private ProductService() {
 
 	}
 	
@@ -28,5 +31,13 @@ public class ProductService {
 			sqlSession.commit();
 		}
 		return res;
+	}
+	
+	public Product selectItemByCode(Product item) {
+		log.debug("selectItemByCode()");
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectOne(namespace+"selectItemByCode", item);
+		}
+		
 	}
 }

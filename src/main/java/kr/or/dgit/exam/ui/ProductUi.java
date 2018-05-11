@@ -6,15 +6,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import kr.or.dgit.exam.dto.Product;
+import kr.or.dgit.exam.dto.Sale;
+import kr.or.dgit.exam.service.ProductService;
+import kr.or.dgit.exam.service.SaleService;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.FocusEvent;
 
-public class ProductUi extends JFrame implements ActionListener {
+public class ProductUi extends JFrame implements ActionListener, FocusListener {
 
 	private JPanel contentPane;
 	private JTextField tfCode;
@@ -23,7 +32,9 @@ public class ProductUi extends JFrame implements ActionListener {
 	private JTextField tfMargin;
 	private JTextField tfName;
 	private JButton btnPrint1;
-
+	private ProductService pService;
+	private SaleService sService;
+	private JButton btnTyping;
 	/**
 	 * Launch the application.
 	 */
@@ -45,6 +56,8 @@ public class ProductUi extends JFrame implements ActionListener {
 	 */
 	public ProductUi() {
 		initComponents();
+		pService = ProductService.getInstance();
+		sService = SaleService.getInstance();
 	}
 	private void initComponents() {
 		setTitle("입력화면");
@@ -73,6 +86,7 @@ public class ProductUi extends JFrame implements ActionListener {
 		pCode.add(lblCode);
 		
 		tfCode = new JTextField();
+		tfCode.addFocusListener(this);
 		pCode.add(tfCode);
 		tfCode.setColumns(10);
 		
@@ -144,7 +158,8 @@ public class ProductUi extends JFrame implements ActionListener {
 		JPanel pBottom = new JPanel();
 		contentPane.add(pBottom, BorderLayout.SOUTH);
 		
-		JButton btnTyping = new JButton("입력");
+		btnTyping = new JButton("입력");
+		btnTyping.addActionListener(this);
 		pBottom.add(btnTyping);
 		
 		btnPrint1 = new JButton("출력1");
@@ -156,6 +171,9 @@ public class ProductUi extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnTyping) {
+			actionPerformedBtnTyping(arg0);
+		}
 		if (arg0.getSource() == btnPrint1) {
 			actionPerformedBtnPrint1(arg0);
 		}
@@ -163,5 +181,52 @@ public class ProductUi extends JFrame implements ActionListener {
 	protected void actionPerformedBtnPrint1(ActionEvent arg0) {
 		ProductMarginRankUi frame = new ProductMarginRankUi();
 		frame.setVisible(true);
+	}
+	public void focusGained(FocusEvent arg0) {
+	}
+	public void focusLost(FocusEvent e) {
+		if (e.getSource() == tfCode) {
+			focusLostTfCode(e);
+		}
+	}
+	protected void focusLostTfCode(FocusEvent e) {
+		if(!(tfCode.getText().equals(""))){
+			String code = tfCode.getText();
+			Product product = new Product();
+			product.setCode(code);
+			product = pService.selectItemByCode(product);
+			tfName.setText(product.getName());
+			tfName.setEnabled(false);
+			tfName.setFocusable(false);
+		}
+	}
+	protected void actionPerformedBtnTyping(ActionEvent e) {
+		if(!(isEmpty())) {
+			String code = tfCode.getText();
+			String name = tfName.getText();
+			int price = Integer.parseInt(tfPrice.getText());
+			int saleCnt = Integer.parseInt((tfCnt.getText()));
+			int marginRate = Integer.parseInt(tfMargin.getText());
+			
+			Sale sale = new Sale(new Product(code),price,saleCnt,marginRate);
+			sService.insertProduct(sale);
+			clearItem();
+		}else {
+			JOptionPane.showMessageDialog(null, "모든 항목을 입력해주세요");
+		}
+	}
+
+	private boolean isEmpty() {
+		return tfCode.getText().equals("")|| tfName.getText().equals("")||
+				tfPrice.getText().equals("")||tfCnt.getText().equals("")||
+				tfMargin.getText().equals("");
+	}
+
+	private void clearItem() {
+		tfCode.setText("");
+		tfName.setText("");
+		tfPrice.setText("");
+		tfCnt.setText("");
+		tfMargin.setText("");
 	}
 }
