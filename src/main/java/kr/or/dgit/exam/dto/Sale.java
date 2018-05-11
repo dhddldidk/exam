@@ -6,9 +6,55 @@ public class Sale {
 	private int price;
 	private int saleCnt;
 	private int marginRate;
+	private SaleDetail saleDetail;
 
 	public Sale() {
 		super();
+	}
+
+	
+	
+	public Sale(int no) {
+		super();
+		this.no = no;
+	}
+
+
+
+	public Sale(int no, Product product, int price, int saleCnt, int marginRate, SaleDetail saleDetail) {
+		super();
+		this.no = no;
+		this.product = product;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+		this.saleDetail = saleDetail;
+	}
+
+	public Sale(Product product, int price, int saleCnt, int marginRate, SaleDetail saleDetail) {
+		super();
+		this.product = product;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+		this.saleDetail = saleDetail;
+	}
+
+	public Sale(int no, Product product, int price, int saleCnt, int marginRate) {
+		super();
+		this.no = no;
+		this.product = product;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+	}
+
+	public Sale(Product product, int price, int saleCnt, int marginRate) {
+		super();
+		this.product = product;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
 	}
 
 	public int getNo() {
@@ -51,6 +97,14 @@ public class Sale {
 		this.marginRate = marginRate;
 	}
 
+	public SaleDetail getSaleDetail() {
+		return saleDetail;
+	}
+
+	public void setSaleDetail(SaleDetail saleDetail) {
+		this.saleDetail = saleDetail;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,8 +144,8 @@ public class Sale {
 
 	@Override
 	public String toString() {
-		return String.format("Sale [no=%s, product=%s, price=%s, saleCnt=%s, marginRate=%s]", no, product, price,
-				saleCnt, marginRate);
+		return String.format("Sale [no=%s, product=%s, price=%s, saleCnt=%s, marginRate=%s, saleDetail=%s]", no,
+				product, price, saleCnt, marginRate, saleDetail);
 	}
 
 }
