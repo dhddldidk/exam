@@ -8,7 +8,7 @@
 	</settings>
 
 	<typeAliases>
-		<package name="kr.or.dgit.exam.dto.Product" />
+		<package name="kr.or.dgit.exam.dto" />
 	</typeAliases>
 	
 	<environments default="development">
@@ -25,5 +25,6 @@
 	
 	<mappers>
 		<mapper resource="kr/or/dgit/exam/mappers/ProductMapper.xml" />
+		<mapper resource="kr/or/dgit/exam/mappers/SaleMapper.xml" />
 	</mappers>
 </configuration>
