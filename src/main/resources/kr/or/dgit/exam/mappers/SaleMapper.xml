@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.dgit.exam.dao.SaleDao">
+	<resultMap type="Sale" id="saleResult">
+		<id property="no" column="no"/>
+		<result property="product.code" column="code"/>
+		<result property="saleCnt" column="saleCnt"/>
+		<result property="marginRate" column="marginRate"/>
+	</resultMap>
+
+	<resultMap type="Sale" id="saleDetailResult" extends="saleResult">
+		<result property="saleDetail.rank" column="rank"/>
+		<result property="saleDetail.supplyPrice" column="supplyPrice"/>
+		<result property="saleDetail.addTax" column="addTax"/>
+		<result property="saleDetail.salePrice" column="salePrice"/>
+		<result property="product.name" column="name"/>
+		<result property="product.code" column="code"/>
+	</resultMap>
+	<insert id="insertProduct">
+		insert into sale(code, price, saleCnt, marginRate) values (#{product.code},#{price},#{saleCnt},#{marginRate})
+	</insert>
+	<select id="callGetTotal" resultType="HashMap">
+	{call callGetTotal()}
+	</select>
+	<select id="callSaleDetail" statementType="CALLABLE" parameterType="HashMap" resultMap="saleDetailResult">
+	{call proc_saledetail_orderby(#{isSalePrice, mode=IN, jdbcType=BOOLEAN})};
+	</select>
+	<select id="selectSaleByAll" resultMap="saleResult">
+		select no, code, saleCnt, marginRate from sale
+	</select>
+	<select id="selectSaleByNo" parameterType="int" resultMap="saleResult">
+		select no, code, saleCnt, marginRate from sale where no=#{no}
+	</select>
+	<update id="updateProduct" parameterType="Sale">
+		update sale set code=#{product.code}, saleCnt=#{saleCnt}, marginRate=#{marginRate} where no=#{no}
+	</update>
+	<delete id="deleteProduct" parameterType="Sale">
+		delete from sale where no=#{no}
+	</delete>
+</mapper>
