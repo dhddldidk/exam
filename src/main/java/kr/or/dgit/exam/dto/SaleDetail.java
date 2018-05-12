@@ -5,19 +5,19 @@ public class SaleDetail {
 	private int supplyPrice;
 	private int addTax;
 	private int salePrice;
-	private int marginRate;
+	private int marginPrice;
 
 	public SaleDetail() {
-		
+
 	}
 
-	public SaleDetail(int rank, int supplyPrice, int addTax, int salePrice, int marginRate) {
+	public SaleDetail(int rank, int supplyPrice, int addTax, int salePrice, int marginPrice) {
 		super();
 		this.rank = rank;
 		this.supplyPrice = supplyPrice;
 		this.addTax = addTax;
 		this.salePrice = salePrice;
-		this.marginRate = marginRate;
+		this.marginPrice = marginPrice;
 	}
 
 	public int getRank() {
@@ -52,18 +52,18 @@ public class SaleDetail {
 		this.salePrice = salePrice;
 	}
 
-	public int getMarginRate() {
-		return marginRate;
+	public int getMarginPrice() {
+		return marginPrice;
 	}
 
-	public void setMarginRate(int marginRate) {
-		this.marginRate = marginRate;
+	public void setMarginPrice(int marginPrice) {
+		this.marginPrice = marginPrice;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("SaleDetail [rank=%s, supplyPrice=%s, addTax=%s, salePrice=%s, marginRate=%s]", rank,
-				supplyPrice, addTax, salePrice, marginRate);
+		return String.format("SaleDetail [rank=%s, supplyPrice=%s, addTax=%s, salePrice=%s, marginPrice=%s]", rank,
+				supplyPrice, addTax, salePrice, marginPrice);
 	}
 
 }

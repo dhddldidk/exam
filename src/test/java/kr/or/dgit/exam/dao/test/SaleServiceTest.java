@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -44,21 +43,22 @@ public class SaleServiceTest {
 		System.out.println(sale);
 	}
 	
-	//@Test
+	@Test
 	public void test2callSaleDetail() {
 		Map<String, Boolean> map = new HashMap<>();
 		map.put("isSalePrice", true);
 		List<Sale> list = service.callSaleDetail(map);
 		Assert.assertNotEquals(0, list.size());
+		System.out.println(list.size());
 	}
 	
-	//@Test
+	@Test
 	public void test3callGetTotal() {
 		List<Map<String, Object>> maps = service.callGetTotal();
 		Assert.assertNotEquals(0, maps.get(0).size());
 	}
 	
-	//@Test
+	@Test
 	public void test4selectSaleByAll() {
 		List<Sale> saleLists = service.selectSaleByAll();
 		Assert.assertNotEquals(0, saleLists.size());
@@ -70,14 +70,14 @@ public class SaleServiceTest {
 		Assert.assertNotEquals(0, sale.getSaleCnt());
 	}
 	
-	@Test
+	//@Test
 	public void test6updateProduct() {
 		Sale newSale = new Sale(1, new Product("A001"), 4500, 150, 10);
 		int res = service.updateProduct(newSale);
 		Assert.assertEquals(1, res);
 	}
 	
-	@Test
+	//@Test
 	public void test7deleteProduct() {
 		Sale newSale = new Sale(1);
 		int res = service.deleteProduct(newSale);

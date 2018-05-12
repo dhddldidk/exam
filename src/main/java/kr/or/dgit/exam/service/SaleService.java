@@ -7,7 +7,6 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.dgit.exam.dto.Product;
 import kr.or.dgit.exam.dto.Sale;
 import kr.or.dgit.exam.util.MyBatisSqlSessionFactory;
 
