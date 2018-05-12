@@ -37,7 +37,7 @@ public class ProductServiceTest {
 		System.out.println(product);
 	}
 	
-	@Test
+	//@Test
 	public void test2selectItemByCode() {
 		Product product = new Product();
 		product.setCode("A001");

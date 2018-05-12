@@ -96,7 +96,7 @@ public abstract class AbstractTablePanel extends JPanel {
 	public void loadData(List<? extends ToArray> items) {
 		Object[][] datas = toArray(items);
 		model = new NonEditableModel(datas, colNames);
-		System.out.println(Arrays.deepToString(datas) + "찍어보기");
+	//	System.out.println(Arrays.deepToString(datas) + "찍어보기");
 		table.setModel(model);
 		setAlignWith();
 	}

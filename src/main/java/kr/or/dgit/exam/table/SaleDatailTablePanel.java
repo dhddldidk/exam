@@ -36,7 +36,6 @@ public class SaleDatailTablePanel extends AbstractTablePanel {
 			
 		}
 		results[items.size()]=getTotal();
-		System.out.println(Arrays.deepToString(results)+"dfdfsafdsfsfdsdfddsdssdfsfd");
 		return results;
 	}
 
@@ -52,7 +51,6 @@ public class SaleDatailTablePanel extends AbstractTablePanel {
 		total[7]=String.format("%,.0f", maps.get("salePrice"));
 		total[8]="";
 		total[9]=String.format("%,.0f", maps.get("marginPrice"));
-		System.out.println(Arrays.toString(total)+"마진액 찍어보기");
 		return total;
 	}
 
