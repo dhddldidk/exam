@@ -158,7 +158,8 @@ public class Sale implements ToArray{
 		return new Object[] {
 				saleDetail.getRank(), 
 				product.getCode(), product.getName(), String.format("%,3d", price), 
-				saleCnt, String.format("%,3d", saleDetail.getSalePrice()),
+				saleCnt, 
+				String.format("%,3d", saleDetail.getSupplyPrice()),
 				String.format("%,3d", saleDetail.getAddTax()),
 				String.format("%,3d", saleDetail.getSalePrice()),
 				marginRate, String.format("%,3d", saleDetail.getMarginPrice())
