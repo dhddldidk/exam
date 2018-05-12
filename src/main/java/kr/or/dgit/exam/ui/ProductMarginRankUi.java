@@ -13,6 +13,8 @@ import kr.or.dgit.exam.service.SaleService;
 import kr.or.dgit.exam.table.AbstractTablePanel;
 import kr.or.dgit.exam.table.SaleDatailTablePanel;
 import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class ProductMarginRankUi extends JFrame {
 
@@ -36,11 +38,9 @@ public class ProductMarginRankUi extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		/*JPanel pmTitle = new JPanel();
-		contentPane.add(pmTitle, BorderLayout.NORTH);
-		pmTitle.setLayout(new GridLayout(1, 0, 0, 0));*/
-		
 		JLabel lblNewLabel = new JLabel(flag?"판매금액 순위":"마진액 순위");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 30));
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		
 		AbstractTablePanel salePriceRankTable = new SaleDatailTablePanel();
@@ -49,11 +49,7 @@ public class ProductMarginRankUi extends JFrame {
 		Map<String, Boolean> map = new HashMap<>();
 		map.put("isSalePrice", flag);
 		salePriceRankTable.loadData(SaleService.getInstance().callSaleDetail(map));
-		
-		/*AbstractTablePanel marginPriceRankTable = new SaleDatailTablePanel(false);
-		contentPane.add(marginPriceRankTable);
-		map.put("isSalePrice", false);
-		marginPriceRankTable.loadData(SaleService.getInstance().callSaleDetail(map));*/
+	
 	}
 
 }
