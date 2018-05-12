@@ -2,26 +2,25 @@ package kr.or.dgit.exam.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.exam.dto.Product;
 import kr.or.dgit.exam.dto.Sale;
 import kr.or.dgit.exam.service.ProductService;
 import kr.or.dgit.exam.service.SaleService;
-
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.FocusEvent;
 
 public class ProductUi extends JFrame implements ActionListener, FocusListener {
 
@@ -35,6 +34,7 @@ public class ProductUi extends JFrame implements ActionListener, FocusListener {
 	private ProductService pService;
 	private SaleService sService;
 	private JButton btnTyping;
+	private JButton btnPrint2;
 	/**
 	 * Launch the application.
 	 */
@@ -59,6 +59,9 @@ public class ProductUi extends JFrame implements ActionListener, FocusListener {
 		pService = ProductService.getInstance();
 		sService = SaleService.getInstance();
 	}
+	
+	
+	
 	private void initComponents() {
 		setTitle("입력화면");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -166,11 +169,15 @@ public class ProductUi extends JFrame implements ActionListener, FocusListener {
 		btnPrint1.addActionListener(this);
 		pBottom.add(btnPrint1);
 		
-		JButton btnPrint2 = new JButton("출력2");
+		btnPrint2 = new JButton("출력2");
+		btnPrint2.addActionListener(this);
 		pBottom.add(btnPrint2);
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnPrint2) {
+			actionPerformedBtnPrint2(arg0);
+		}
 		if (arg0.getSource() == btnTyping) {
 			actionPerformedBtnTyping(arg0);
 		}
@@ -179,7 +186,7 @@ public class ProductUi extends JFrame implements ActionListener, FocusListener {
 		}
 	}
 	protected void actionPerformedBtnPrint1(ActionEvent arg0) {
-		ProductMarginRankUi frame = new ProductMarginRankUi();
+		ProductMarginRankUi frame = new ProductMarginRankUi(true);
 		frame.setVisible(true);
 	}
 	public void focusGained(FocusEvent arg0) {
@@ -228,5 +235,9 @@ public class ProductUi extends JFrame implements ActionListener, FocusListener {
 		tfPrice.setText("");
 		tfCnt.setText("");
 		tfMargin.setText("");
+	}
+	protected void actionPerformedBtnPrint2(ActionEvent arg0) {
+		ProductMarginRankUi frame = new ProductMarginRankUi(false);
+		frame.setVisible(true);
 	}
 }
